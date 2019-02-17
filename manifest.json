@@ -2,7 +2,7 @@
   "name": "Pretend not using Ptt",
   "version": "1.0",
   "description": "Let's change the CSS of Ptt article, so the page just look like u are hard work for Codingggggg. ",
-  "permissions": ["activeTab", "declarativeContent", "storage"],
+  "permissions": ["activeTab", "declarativeContent", "storage", "contextMenus"],
   "options_page": "options.html",
   "background": {
     "scripts": ["background.js"],
