@@ -1,7 +1,7 @@
 {
-  "name": "Getting Started Example",
+  "name": "Pretend not using Ptt",
   "version": "1.0",
-  "description": "Build an Extension!",
+  "description": "Let's change the CSS of Ptt article, so the page just look like u are hard work for Codingggggg. ",
   "permissions": ["activeTab", "declarativeContent", "storage"],
   "options_page": "options.html",
   "background": {
