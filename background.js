@@ -7,31 +7,53 @@ function createMenus(){
   var parent = chrome.contextMenus.create({
     "id": "parent",
     "title": "Pretend not using Ptt",
-    "contexts": ["all"],
+    "contexts": ["all"]
   })
 
   var launchChangeCSS = chrome.contextMenus.create({
     "id" : "launch",
     "title": "Launch app",
     "contexts": ['all'],
-    "parentId" : parent
+    "parentId" : parent,
   })
 
   var pauseChangeCSS = chrome.contextMenus.create({
-    "id": "Pause",
+    "id": "pause",
     "title" : "Pause app",
     "contexts": ['all'],
-    "parentId": parent
+    "parentId": parent,
   })
 }
 
-createMenus()
 
+chrome.contextMenus.onClicked.addListener(function (clickData) {
+	if(clickData.menuItemId == "launch") {
+    chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+      chrome.tabs.insertCSS(
+          tabs[0].id,
+          {
+            file: 'custom.css',
+            allFrames: true
+          });
+    });
+		console.log('launch')
+  }
+
+  if(clickData.menuItemId == "pause") {
+    chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+      chrome.tabs.insertCSS(
+          tabs[0].id,
+          {
+            file: 'basic.css',
+            allFrames: true
+          });
+    });
+		console.log('pause')
+	}
+});
 
 chrome.runtime.onInstalled.addListener(function() {
-  chrome.storage.sync.set({color: '#3aa757'}, function() {
-    console.log('The color is green.');
-  });
+  createMenus()
   chrome.declarativeContent.onPageChanged.removeRules(undefined, function() {
     chrome.declarativeContent.onPageChanged.addRules([{
       conditions: [new chrome.declarativeContent.PageStateMatcher({
